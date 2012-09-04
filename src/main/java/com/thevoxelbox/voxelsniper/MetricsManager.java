@@ -64,7 +64,7 @@ public final class MetricsManager {
                 public int getValue() {
                     int _count = 0;
                     for (final Player _player : Bukkit.getOnlinePlayers()) {
-                        if (VoxelSniper.getSniperPermissionHelper().isSniper(_player)) {
+                    	if (!_player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
                             _count++;
                         }
                     }
@@ -77,7 +77,7 @@ public final class MetricsManager {
                 public int getValue() {
                     int _count = 0;
                     for (final Player _player : Bukkit.getOnlinePlayers()) {
-                        if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(_player)) {
+                        if (_player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
                             _count++;
                         }
                     }
@@ -100,7 +100,7 @@ public final class MetricsManager {
 
             final Graph _graphBrushUsage = _metrics.createGraph("Brush Usage");
 
-            final HashMap<String, Brush> _temp = SniperBrushes.getSniperBrushes();
+            final HashMap<String, Brush> _temp = SniperBrushes.getSniperBrushes(null);
             for (final Entry<String, Brush> _entry : _temp.entrySet()) {
                 _graphBrushUsage.addPlotter(new Metrics.Plotter(SniperBrushes.getName(_entry.getValue())) {
                     @Override

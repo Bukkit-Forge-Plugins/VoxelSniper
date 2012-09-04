@@ -35,9 +35,9 @@ public class VoxelSniperListener implements Listener {
             return VoxelSniperListener.commandVChunk(player);
         } else if (command.equalsIgnoreCase("paint")) {
             return VoxelSniperListener.commandPaint(player, split);
-        } else if (command.equalsIgnoreCase("goto") && VoxelSniper.getSniperPermissionHelper().isSniper(player)) {
+        } else if (command.equalsIgnoreCase("goto") && player.hasPermission(SniperPermissionHelper.VOXELSNIPER_COMMANDS_GOTO)) {
             return VoxelSniperListener.commandGoto(player, split);
-        } else if (VoxelSniper.getSniperPermissionHelper().isSniper(player) || VoxelSniper.getSniperPermissionHelper().isLiteSniper(player)) {
+        } else if (player.hasPermission(SniperPermissionHelper.VOXELSNIPER_COMMANDS)) {
             if (command.equalsIgnoreCase("btool")) {
                 return VoxelSniperListener.commandSniperBTool(player, split);
             } else if (command.equalsIgnoreCase("uuu")) {
@@ -83,7 +83,7 @@ public class VoxelSniperListener implements Listener {
      * @return
      */
     private static boolean commandGoto(final Player player, final String[] split) {
-        if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(player)) {
+        if (!player.hasPermission(SniperPermissionHelper.VOXELSNIPER_COMMANDS_GOTO)) {
             player.sendMessage(ChatColor.RED + "A LiteSniper is not permitted to use this command.");
             return true;
         }
@@ -555,14 +555,14 @@ public class VoxelSniperListener implements Listener {
                     VoxelSniper.getSniperPermissionHelper().getSniperInstance(player).togglePrintout();
                     return true;
                 } else if (split[0].equalsIgnoreCase("lightning")) {
-                    if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(player)) {
+                    if (!player.hasPermission(SniperPermissionHelper.VOXELSNIPER_COMMANDS_LIGHTNING)) {
                         player.sendMessage(ChatColor.RED + "A LiteSniper is not permitted to use this command.");
                         return true;
                     }
                     VoxelSniper.getSniperPermissionHelper().getSniperInstance(player).toggleLightning();
                     return true;
                 } else if (split[0].equalsIgnoreCase("weather")) {
-                    if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(player)) {
+                    if (!player.hasPermission(SniperPermissionHelper.VOXELSNIPER_COMMANDS_WEATHER)) {
                         player.sendMessage(ChatColor.RED + "A LiteSniper is not permitted to use this command.");
                         return true;
                     }
@@ -573,7 +573,7 @@ public class VoxelSniperListener implements Listener {
                 } else if (split[0].equalsIgnoreCase("range")) {
                     if (split.length == 2) {
                         final double _i = Double.parseDouble(split[1]);
-                        if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(player) && (_i > 12 || _i < -12)) {
+                        if (!player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED) && (_i > 12 || _i < -12)) {
                             player.sendMessage(ChatColor.RED + "A LiteSniper is not permitted to use ranges over 12.");
                             return true;
                         }
@@ -671,33 +671,18 @@ public class VoxelSniperListener implements Listener {
     /**
      * @param event
      */
-    @EventHandler
-    public final void onPlayerJoin(final PlayerJoinEvent event) {
-        final Player _p = event.getPlayer();
-        _p.getName();
-        if (VoxelSniper.getSniperPermissionHelper().isSniper(_p)) {
-            try {
-                final Sniper _vs = VoxelSniper.getSniperPermissionHelper().getSniperInstance(_p);
-                _vs.setPlayer(_p);
-                _vs.info();
-                return;
-            } catch (final Exception _e) {
-                return;
-            }
-        }
-        if (VoxelSniper.getSniperPermissionHelper().isLiteSniper(_p)) {
-            try {
-                final Sniper _vs = VoxelSniper.getSniperPermissionHelper().getSniperInstance(_p);
-                if (_vs instanceof LiteSniper) {
-                    _vs.setPlayer(_p);
-                    _vs.info();
-                    return;
-                } else {
-                    return;
-                }
-            } catch (final Exception _e) {
-                return;
-            }
-        }
-    }
+	@EventHandler
+	public final void onPlayerJoin(final PlayerJoinEvent event) {
+		final Player _p = event.getPlayer();
+		_p.getName();
+
+		try {
+			final Sniper _vs = VoxelSniper.getSniperPermissionHelper().getSniperInstance(_p);
+			_vs.setPlayer(_p);
+			_vs.info();
+			return;
+		} catch (final Exception _e) {
+			return;
+		}
+	}
 }

@@ -91,9 +91,11 @@ public class Sniper {
     /**
      * Default constructor.
      */
-    public Sniper() {
-        this.myBrushes = SniperBrushes.getSniperBrushes();
-        this.brushAlt = SniperBrushes.getBrushAlternates();
+    public Sniper(Player player) {
+    	this.player = player;
+    	
+        this.myBrushes = SniperBrushes.getSniperBrushes(player);
+        this.brushAlt = SniperBrushes.getBrushAlternates(player);
 
         this.voxelMessage = new Message(this.data);
         this.data.setVoxelMessage(this.voxelMessage);
@@ -513,11 +515,8 @@ public class Sniper {
      * 
      */
     public final void reset() {
-        if (this instanceof LiteSniper) {
-            this.myBrushes = LiteSniperBrushes.getSniperBrushes();
-        } else {
-            this.myBrushes = SniperBrushes.getSniperBrushes();
-        }
+        this.myBrushes = SniperBrushes.getSniperBrushes(this.player);
+        
 
         if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
             final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
@@ -701,15 +700,30 @@ public class Sniper {
     /**
      * @param size
      */
-    public void setBrushSize(final int size) {
-        if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
-            final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
-            _bt.data.setBrushSize(size);
-            _bt.data.getVoxelMessage().size();
-        } else {
-            this.data.setBrushSize(size);
-            this.voxelMessage.size();
-        }
+	public void setBrushSize(final int size) {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+				final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+				_bt.data.setBrushSize(size);
+				_bt.data.getVoxelMessage().size();
+			} else {
+				this.data.setBrushSize(size);
+				this.voxelMessage.size();
+			}
+		} else {
+			if (size <= VoxelSniper.getInstance().getLiteMaxBrush() && size >= 0) {
+				if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+					final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+					_bt.data.setBrushSize(size);
+					_bt.data.getVoxelMessage().size();
+				} else {
+					this.data.setBrushSize(size);
+					this.voxelMessage.size();
+				}
+	        } else {
+	            this.getPlayer().sendMessage(ChatColor.RED + "You cant use this size of brush!");
+	        }
+		}
     }
 
     /**
@@ -759,16 +773,32 @@ public class Sniper {
     /**
      * @param heigth
      */
-    public void setHeigth(final int heigth) {
-        if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
-            final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
-            _bt.data.setVoxelHeight(heigth);
-            _bt.data.getVoxelMessage().height();
-        } else {
-            this.data.setVoxelHeight(heigth);
-            this.voxelMessage.height();
-        }
-    }
+	public void setHeigth(final int heigth) {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+				final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+				_bt.data.setVoxelHeight(heigth);
+				_bt.data.getVoxelMessage().height();
+			} else {
+				this.data.setVoxelHeight(heigth);
+				this.voxelMessage.height();
+			}
+		} else {
+			if (heigth <= (VoxelSniper.getInstance().getLiteMaxBrush() * 2 + 1) && heigth >= 0) {
+				if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+					final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+					_bt.data.setVoxelHeight(heigth);
+					_bt.data.getVoxelMessage().height();
+				} else {
+					this.data.setVoxelHeight(heigth);
+					this.voxelMessage.height();
+				}
+			} else {
+				this.getPlayer().sendMessage(ChatColor.RED + "You cant use this size of heigth!");
+			}
+
+		}
+	}
 
     public void setLightning(final boolean lightning) {
         this.lightning = lightning;
@@ -812,16 +842,38 @@ public class Sniper {
     /**
      * @param rng
      */
-    public void setRange(final double rng) {
-        if (rng > -1) {
-            this.range = rng;
-            this.distRestrict = true;
-            this.voxelMessage.toggleRange();
-        } else {
-            this.distRestrict = !this.distRestrict;
-            this.voxelMessage.toggleRange();
-        }
-    }
+	public void setRange(final double rng) {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			if (rng > -1) {
+				this.range = rng;
+				this.distRestrict = true;
+				this.voxelMessage.toggleRange();
+			} else {
+				this.distRestrict = !this.distRestrict;
+				this.voxelMessage.toggleRange();
+			}
+		} else {
+			if (rng > -1) {
+				if (rng <= 40) {
+					if (rng > -1) {
+						this.range = rng;
+						this.distRestrict = true;
+						this.voxelMessage.toggleRange();
+					} else {
+						this.distRestrict = !this.distRestrict;
+						this.voxelMessage.toggleRange();
+					}
+					this.setDistRestrict(true);
+					this.getVoxelMessage().toggleRange();
+				} else {
+					this.getPlayer().sendMessage(ChatColor.GREEN + "liteSnipers are not allowed to use ranges higher than 40.");
+				}
+			} else {
+				this.setDistRestrict(!this.isDistRestrict());
+				this.getVoxelMessage().toggleRange();
+			}
+		}
+	}
 
     public void setReadingBrush(final Brush readingBrush) {
         this.readingBrush = readingBrush;
@@ -834,16 +886,31 @@ public class Sniper {
     /**
      * @param replace
      */
-    public void setReplace(final int replace) {
-        if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
-            final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
-            _bt.data.setReplaceId(replace);
-            _bt.data.getVoxelMessage().replace();
-        } else {
-            this.data.setReplaceId(replace);
-            this.voxelMessage.replace();
-        }
-    }
+	public void setReplace(final int replace) {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+				final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+				_bt.data.setReplaceId(replace);
+				_bt.data.getVoxelMessage().replace();
+			} else {
+				this.data.setReplaceId(replace);
+				this.voxelMessage.replace();
+			}
+		} else {
+			if (!VoxelSniper.getInstance().getLiteRestricted().contains(replace)) {
+				if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+					final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+					_bt.data.setReplaceId(replace);
+					_bt.data.getVoxelMessage().replace();
+				} else {
+					this.data.setReplaceId(replace);
+					this.voxelMessage.replace();
+				}
+			} else {
+				this.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to use this block!");
+			}
+		}
+	}
 
     /**
      * @param dat
@@ -870,16 +937,31 @@ public class Sniper {
     /**
      * @param voxel
      */
-    public void setVoxel(final int voxel) {
-        if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
-            final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
-            _bt.data.setVoxelId(voxel);
-            _bt.data.getVoxelMessage().voxel();
-        } else {
-            this.data.setVoxelId(voxel);
-            this.voxelMessage.voxel();
-        }
-    }
+	public void setVoxel(final int voxel) {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+				final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+				_bt.data.setVoxelId(voxel);
+				_bt.data.getVoxelMessage().voxel();
+			} else {
+				this.data.setVoxelId(voxel);
+				this.voxelMessage.voxel();
+			}
+		} else {
+			if (!VoxelSniper.getInstance().getLiteRestricted().contains(voxel)) {
+				if (this.brushTools.containsKey(this.player.getItemInHand().getType())) {
+					final BrushTool _bt = this.brushTools.get(this.player.getItemInHand().getType());
+					_bt.data.setVoxelId(voxel);
+					_bt.data.getVoxelMessage().voxel();
+				} else {
+					this.data.setVoxelId(voxel);
+					this.voxelMessage.voxel();
+				}
+			} else {
+				this.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to use this block!");
+			}
+		}
+	}
 
     public void setVoxelMessage(final Message voxelMessage) {
         this.voxelMessage = voxelMessage;
@@ -940,10 +1022,14 @@ public class Sniper {
     /**
      * 
      */
-    public void toggleLightning() {
-        this.lightning = !this.lightning;
-        this.voxelMessage.toggleLightning();
-    }
+	public void toggleLightning() {
+		if (this.player.hasPermission(SniperPermissionHelper.VOXELSNIPER_MISC_UNRESTRICTED)) {
+			this.lightning = !this.lightning;
+			this.voxelMessage.toggleLightning();
+		} else {
+			this.getPlayer().sendMessage(ChatColor.GREEN + "liteSnipers are not allowed to use this.");
+		}
+	}
 
     /**
      * 

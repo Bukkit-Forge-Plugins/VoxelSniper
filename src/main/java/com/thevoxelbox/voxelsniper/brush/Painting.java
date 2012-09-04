@@ -2,6 +2,7 @@ package com.thevoxelbox.voxelsniper.brush;
 
 import com.thevoxelbox.voxelsniper.Message;
 import com.thevoxelbox.voxelsniper.PaintingWrapper;
+import com.thevoxelbox.voxelsniper.SnipeData;
 
 /**
  * Painting scrolling Brush

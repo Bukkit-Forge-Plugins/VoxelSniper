@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bukkit.entity.Player;
+
 import com.thevoxelbox.voxelsniper.brush.AntiFreeze;
 import com.thevoxelbox.voxelsniper.brush.Ball;
 import com.thevoxelbox.voxelsniper.brush.Biome;
@@ -44,7 +46,6 @@ import com.thevoxelbox.voxelsniper.brush.HeatRay;
 import com.thevoxelbox.voxelsniper.brush.IBrush;
 import com.thevoxelbox.voxelsniper.brush.Jagged;
 import com.thevoxelbox.voxelsniper.brush.Jockey;
-import com.thevoxelbox.voxelsniper.brush.Lightning;
 import com.thevoxelbox.voxelsniper.brush.Line;
 import com.thevoxelbox.voxelsniper.brush.Meteor;
 import com.thevoxelbox.voxelsniper.brush.Move;
@@ -94,115 +95,116 @@ import com.thevoxelbox.voxelsniper.brush.WarpInStyle;
  */
 public enum SniperBrushes {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~przerwap~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    SNIPE(Snipe.class, "s", "snipe"), // [ 1 ] \\
-    DISC(Disc.class, "d", "disc"), // [ 2 ] \\
-    DISC_FACE(DiscFace.class, "df", "discface"), // [ 3 ] \\
-    BALL(Ball.class, "b", "ball"), // [ 4 ] \\
-    VOXEL(Voxel.class, "v", "voxel"), // [ 5 ] \\
-    VOXEL_DISC(VoxelDisc.class, "vd", "voxeldisc"), // [ 6 ] \\
-    VOXEL_DISC_FACE(VoxelDiscFace.class, "vdf", "voxeldiscface"), // [ 7 ] \\
-    ENTITY(Entity.class, "en", "entity"), // [ 8 ] \\
-    OCEAN(Ocean.class, "o", "ocean"), // [ 9 ] \\
-    OCEAN_SELECTION(OceanSelection.class, "ocs", "oceanselection"), // [ 10 ] \\
-    CLONE_STAMP(CloneStamp.class, "cs", "clonestamp"), // [ 11 ] \\
-    ERODE(Erode.class, "e", "erode"), // [ 12 ] \\
-    SOFT_SELECT_TEST(PullTest.class, "pull", "pull"), // [ 13 ] \\
-    PAINTING(Painting.class, "paint", "painting"), // [ 14 ] \\
-    CANYON(Canyon.class, "ca", "canyon"), // [ 15 ] \\
-    CANYON_SELECTION(CanyonSelection.class, "cas", "canyonselection"), // [ 16 ] \\
-    TWO_D_ROTATION(Rot2D.class, "rot2", "rotation2D"), // [ 17 ] \\
-    WARP_IN_STYLE(WarpInStyle.class, "world", "warpinstyle"), // [ 18 ] \\
-    FILL_DOWN(FillDown.class, "fd", "filldown"), // [ 19 ] \\
-    SET(Set.class, "set", "set"), // [ 20 ] \\
-    JOCKEY(Jockey.class, "jockey", "jockey"), // [ 21 ] \\
-    ENTITY_REMOVAL(EntityRemoval.class, "er", "entityremoval"), // [ 22 ] \\
-    RING(Ring.class, "ri", "ring"), // [ 23 ] \\
-    SHELL_SET(ShellSet.class, "shs", "shellset"), // [ 24 ] \\
-    BIOME(Biome.class, "bio", "biome"), // [ 25 ] \\
+    SNIPE(Snipe.class, "s", "snipe", "voxelsniper.sniper.snipe"), // [ 1 ] \\
+    DISC(Disc.class, "d", "disc", "voxelsniper.sniper.disc"), // [ 2 ] \\
+    DISC_FACE(DiscFace.class, "df", "discface", "voxelsniper.sniper.discface"), // [ 3 ] \\
+    BALL(Ball.class, "b", "ball", "voxelsniper.sniper.ball"), // [ 4 ] \\
+    VOXEL(Voxel.class, "v", "voxel", "voxelsniper.sniper.voxel"), // [ 5 ] \\
+    VOXEL_DISC(VoxelDisc.class, "vd", "voxeldisc", "voxelsniper.sniper.voxeldisc"), // [ 6 ] \\
+    VOXEL_DISC_FACE(VoxelDiscFace.class, "vdf", "voxeldiscface", "voxelsniper.sniper.voxeldiscface"), // [ 7 ] \\
+    ENTITY(Entity.class, "en", "entity", "voxelsniper.sniper.entity"), // [ 8 ] \\
+    OCEAN(Ocean.class, "o", "ocean", "voxelsniper.sniper.ocean"), // [ 9 ] \\
+    OCEAN_SELECTION(OceanSelection.class, "ocs", "oceanselection", "voxelsniper.sniper.oceanselection"), // [ 10 ] \\
+    CLONE_STAMP(CloneStamp.class, "cs", "clonestamp", "voxelsniper.sniper.clonestamp"), // [ 11 ] \\
+    ERODE(Erode.class, "e", "erode", "voxelsniper.sniper.erode"), // [ 12 ] \\
+    SOFT_SELECT_TEST(PullTest.class, "pull", "pull", "voxelsniper.sniper.pull"), // [ 13 ] \\
+    PAINTING(Painting.class, "paint", "painting", "voxelsniper.sniper.painting"), // [ 14 ] \\
+    CANYON(Canyon.class, "ca", "canyon", "voxelsniper.sniper.canyon"), // [ 15 ] \\
+    CANYON_SELECTION(CanyonSelection.class, "cas", "canyonselection", "voxelsniper.sniper.canyonselection"), // [ 16 ] \\
+    TWO_D_ROTATION(Rot2D.class, "rot2", "rotation2D", "voxelsniper.sniper.rotation2D"), // [ 17 ] \\
+    WARP_IN_STYLE(WarpInStyle.class, "world", "warpinstyle", "voxelsniper.sniper.warpinstyle"), // [ 18 ] \\
+    FILL_DOWN(FillDown.class, "fd", "filldown", "voxelsniper.sniper.filldown"), // [ 19 ] \\
+    SET(Set.class, "set", "set", "voxelsniper.sniper.set"), // [ 20 ] \\
+    JOCKEY(Jockey.class, "jockey", "jockey", "voxelsniper.sniper.jockey"), // [ 21 ] \\
+    ENTITY_REMOVAL(EntityRemoval.class, "er", "entityremoval", "voxelsniper.sniper.entityremoval"), // [ 22 ] \\
+    RING(Ring.class, "ri", "ring", "voxelsniper.sniper.ring"), // [ 23 ] \\
+    SHELL_SET(ShellSet.class, "shs", "shellset", "voxelsniper.sniper.shellset"), // [ 24 ] \\
+    BIOME(Biome.class, "bio", "biome", "voxelsniper.sniper.biome"), // [ 25 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~giltwist~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    SPLATTER_DISC(SplatterDisc.class, "sd", "splatdisc"), // [ 1 ] \\
-    SPLATTER_VOXEL_DISC(SplatterVoxelDisc.class, "svd", "splatvoxeldisc"), // [ 2 ] \\
-    SPLATTER_BALL(SplatterBall.class, "sb", "splatball"), // [ 3 ] \\
-    SPLATTER_VOXEL(SplatterVoxel.class, "sv", "splatvoxel"), // [ 4 ] \\
-    BLOB(Blob.class, "blob", "splatblob"), // [ 5 ] \\
-    SPIRAL_STAIRCASE(SpiralStaircase.class, "sstair", "spiralstaircase"), // [ 6 ] \\
-    SPLATTER_OVERLAY(SplatterOverlay.class, "sover", "splatteroverlay"), // [ 7 ] \\
-    BLEND_VOXEL_DISC(BlendVoxelDisc.class, "bvd", "blendvoxeldisc"), // [ 8 ] \\
-    BLEND_VOXEL(BlendVoxel.class, "bv", "blendvoxel"), // [ 9 ] \\
-    BLEND_DISC(BlendDisc.class, "bd", "blenddisc"), // [ 10 ] \\
-    BLEND_BALL(BlendBall.class, "bb", "blendball"), // [ 11 ] \\
-    LINE(Line.class, "l", "line"), // [ 12 ] \\
-    SNOW_CONE(SnowCone.class, "snow", "snowcone"), // [ 13 ] \\
-    SHELL_BALL(ShellBall.class, "shb", "shellball"), // [ 14 ] \\
-    SHELL_VOXEL(ShellVoxel.class, "shv", "shellvoxel"), // [ 15 ] \\
-    RANDOM_ERODE(RandomErode.class, "re", "randomerode"), // [ 16 ] \\
-    METEOR(Meteor.class, "met", "meteor"), // [ 17 ] \\
-    TRIANGLE(Triangle.class, "tri", "triangle"), // [ 19 ] \\
-    ERASER(Eraser.class, "erase", "eraser"), // [ 20 ] \\
-    COPYPASTA(CopyPasta.class, "cp", "copypasta"), // [ 22 ] \\
-    COMET(Comet.class, "com", "comet"), // [ 23 ] \\
-    JAGGED(Jagged.class, "j", "jagged"), // [ 24 ] \\
-    THREEPOINTCIRCLE(ThreePointCircle.class, "tpc", "threepointcircle"), // [ 25 ] \\
+    SPLATTER_DISC(SplatterDisc.class, "sd", "splatdisc", "voxelsniper.sniper.splatdisc"), // [ 1 ] \\
+    SPLATTER_VOXEL_DISC(SplatterVoxelDisc.class, "svd", "splatvoxeldisc", "voxelsniper.sniper.splatvoxeldisc"), // [ 2 ] \\
+    SPLATTER_BALL(SplatterBall.class, "sb", "splatball", "voxelsniper.sniper.splatball"), // [ 3 ] \\
+    SPLATTER_VOXEL(SplatterVoxel.class, "sv", "splatvoxel", "voxelsniper.sniper.splatvoxel"), // [ 4 ] \\
+    BLOB(Blob.class, "blob", "splatblob", "voxelsniper.sniper.splatblob"), // [ 5 ] \\
+    SPIRAL_STAIRCASE(SpiralStaircase.class, "sstair", "spiralstaircase", "voxelsniper.sniper.spiralstaircase"), // [ 6 ] \\
+    SPLATTER_OVERLAY(SplatterOverlay.class, "sover", "splatteroverlay", "voxelsniper.sniper.splatteroverlay"), // [ 7 ] \\
+    BLEND_VOXEL_DISC(BlendVoxelDisc.class, "bvd", "blendvoxeldisc", "voxelsniper.sniper.blendvoxeldisc"), // [ 8 ] \\
+    BLEND_VOXEL(BlendVoxel.class, "bv", "blendvoxel", "voxelsniper.sniper.blendvoxel"), // [ 9 ] \\
+    BLEND_DISC(BlendDisc.class, "bd", "blenddisc", "voxelsniper.sniper.blenddisc"), // [ 10 ] \\
+    BLEND_BALL(BlendBall.class, "bb", "blendball", "voxelsniper.sniper.blendball"), // [ 11 ] \\
+    LINE(Line.class, "l", "line", "voxelsniper.sniper.line"), // [ 12 ] \\
+    SNOW_CONE(SnowCone.class, "snow", "snowcone", "voxelsniper.sniper.snowcone"), // [ 13 ] \\
+    SHELL_BALL(ShellBall.class, "shb", "shellball", "voxelsniper.sniper.shellball"), // [ 14 ] \\
+    SHELL_VOXEL(ShellVoxel.class, "shv", "shellvoxel", "voxelsniper.sniper.shellvoxel"), // [ 15 ] \\
+    RANDOM_ERODE(RandomErode.class, "re", "randomerode", "voxelsniper.sniper.randomerode"), // [ 16 ] \\
+    METEOR(Meteor.class, "met", "meteor", "voxelsniper.sniper.meteor"), // [ 17 ] \\
+    TRIANGLE(Triangle.class, "tri", "triangle", "voxelsniper.sniper.triangle"), // [ 19 ] \\
+    ERASER(Eraser.class, "erase", "eraser", "voxelsniper.sniper.eraser"), // [ 20 ] \\
+    COPYPASTA(CopyPasta.class, "cp", "copypasta", "voxelsniper.sniper.copypasta"), // [ 22 ] \\
+    COMET(Comet.class, "com", "comet", "voxelsniper.sniper.comet"), // [ 23 ] \\
+    JAGGED(Jagged.class, "j", "jagged", "voxelsniper.sniper.jagged"), // [ 24 ] \\
+    THREEPOINTCIRCLE(ThreePointCircle.class, "tpc", "threepointcircle", "voxelsniper.sniper.threepointcircle"), // [ 25 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Ghost8700~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    GENERATE_TREE(GenerateTree.class, "gt", "generatetree"), // [ 1 ] \\
+    GENERATE_TREE(GenerateTree.class, "gt", "generatetree", "voxelsniper.sniper.generatetree"), // [ 1 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DivineRage~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    GENERATE_CHUNK(GenerateChunk.class, "gc", "generatechunk"), // [ 1 ] \\ // No documentation. Fucks up client-sided. Still works though.
-    TREE_GENERATE(TreeSnipe.class, "t", "treesnipe"), // [ 2 ] \\
-    POINTLESS(Pointless.class, "drlolol", "pointlessbrush"), // [ 4 ] \\
-    SCANNER(Scanner.class, "sc", "scanner"), // [ 5 ] \\
+    GENERATE_CHUNK(GenerateChunk.class, "gc", "generatechunk", "voxelsniper.sniper.generatechunk"), // [ 1 ] \\ // No documentation. Fucks up client-sided. Still works though.
+    TREE_GENERATE(TreeSnipe.class, "t", "treesnipe", "voxelsniper.sniper.treesnipe"), // [ 2 ] \\
+    POINTLESS(Pointless.class, "drlolol", "pointlessbrush", "voxelsniper.sniper.pointlessbrush"), // [ 4 ] \\
+    SCANNER(Scanner.class, "sc", "scanner", "voxelsniper.sniper.scanner"), // [ 5 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Gavjenks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    HEAT_RAY(HeatRay.class, "hr", "heatray"), // [ 1 ] \\
-    OVERLAY(Overlay.class, "over", "overlay"), // [ 4 ] \\
-    DOME(Dome.class, "dome", "domebrush"), // [ 6 ] \\
-    RULER(Ruler.class, "r", "ruler"), // [ 7 ] \\
-    VOLT_METER(VoltMeter.class, "volt", "voltmeter"), // [ 8 ] \\
-    LIGHTNING(Lightning.class, "light", "lightning"), // [ 9 ] \\
-    DRAIN(Drain.class, "drain", "drain"), // [ 10 ] \\
-    THREE_D_ROTATION(Rot3D.class, "rot3", "rotation3D"), // [ 11 ] \\
-    ANTI_FREEZE(AntiFreeze.class, "af", "antifreeze"), // [ 13 ] \\
-    TWO_D_ROTATION_EXP(Rot2Dvert.class, "rot2v", "rotation2Dvertical"), // [ 21 ] \\
-    STENCIL(Stencil.class, "st", "stencil"), // [ 23 ] \\
-    STENCILLIST(StencilList.class, "sl", "stencillist"), // [ 24 ] \\
-    BLOCK_RESET_SURFACE(BlockResetBrushSurface.class, "brbs", "blockresetbrushsurface"), // [25] \\
-    FLAT_OCEAN(FlatOcean.class, "fo", "flatocean"), // [ 26 ] \\
+    HEAT_RAY(HeatRay.class, "hr", "heatray", "voxelsniper.sniper.heatray"), // [ 1 ] \\
+    OVERLAY(Overlay.class, "over", "overlay", "voxelsniper.sniper.overlay"), // [ 4 ] \\
+    DOME(Dome.class, "dome", "domebrush", "voxelsniper.sniper.domebrush"), // [ 6 ] \\
+    RULER(Ruler.class, "r", "ruler", "voxelsniper.sniper.ruler"), // [ 7 ] \\
+    VOLT_METER(VoltMeter.class, "volt", "voltmeter", "voxelsniper.sniper.voltmeter"), // [ 8 ] \\
+    DRAIN(Drain.class, "drain", "drain", "voxelsniper.sniper.drain"), // [ 10 ] \\
+    THREE_D_ROTATION(Rot3D.class, "rot3", "rotation3D", "voxelsniper.sniper.rotation3D"), // [ 11 ] \\
+    ANTI_FREEZE(AntiFreeze.class, "af", "antifreeze", "voxelsniper.sniper.antifreeze"), // [ 13 ] \\
+    TWO_D_ROTATION_EXP(Rot2Dvert.class, "rot2v", "rotation2Dvertical", "voxelsniper.sniper.rotation2Dvertical"), // [ 21 ] \\
+    STENCIL(Stencil.class, "st", "stencil", "voxelsniper.sniper.stencil"), // [ 23 ] \\
+    STENCILLIST(StencilList.class, "sl", "stencillist", "voxelsniper.sniper.stencillist"), // [ 24 ] \\
+    BLOCK_RESET_SURFACE(BlockResetBrushSurface.class, "brbs", "blockresetbrushsurface", "voxelsniper.sniper.blockresetbrushsurface"), // [25] \\
+    FLAT_OCEAN(FlatOcean.class, "fo", "flatocean", "voxelsniper.sniper.flatocean"), // [ 26 ] \\
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~psanker~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    ELLIPSE(Ellipse.class, "el", "ellipse"), // [ 1 ] \\
-    SPLINE(Spline.class, "sp", "spline"), // [ 2 ] \\
-    CLEAN_SNOW(CleanSnow.class, "cls", "cleansnow"), // [ 4 ] \\
-    EXTRUDE(Extrude.class, "ex", "extrude"), // [ 5 ] \\
+    ELLIPSE(Ellipse.class, "el", "ellipse", "voxelsniper.sniper.ellipse"), // [ 1 ] \\
+    SPLINE(Spline.class, "sp", "spline", "voxelsniper.sniper.spline"), // [ 2 ] \\
+    CLEAN_SNOW(CleanSnow.class, "cls", "cleansnow", "voxelsniper.sniper.cleansnow"), // [ 4 ] \\
+    EXTRUDE(Extrude.class, "ex", "extrude", "voxelsniper.sniper.extrude"), // [ 5 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Deamon~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    SET_REDSTONE_FLIP(SetRedstoneFlip.class, "setrf", "setredstoneflip"), // [ 1 ] \\
+    SET_REDSTONE_FLIP(SetRedstoneFlip.class, "setrf", "setredstoneflip", "voxelsniper.sniper.setredstoneflip"), // [ 1 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Jmck95~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    UNDERLAY(Underlay.class, "under", "underlay"), // [ 1 ] \\
+    UNDERLAY(Underlay.class, "under", "underlay", "voxelsniper.sniper.underlay"), // [ 1 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Kavukamari~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    CYLINDER(Cylinder.class, "c", "cylinder"),
+    CYLINDER(Cylinder.class, "c", "cylinder", "voxelsniper.sniper.cylinder"),
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Monofraps~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    PUNISH(Punish.class, "p", "punish"), // [ 1 ] \\
+    PUNISH(Punish.class, "p", "punish", "voxelsniper.sniper.punish"), // [ 1 ] \\
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MikeMatrix~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    MOVE(Move.class, "mv", "move"), // [1] \\
-    BLOCK_RESET(BlockResetBrush.class, "brb", "blockresetbrush"), // [1] \\
-    CHECKER_VOXEL_DISC(CheckerVoxelDisc.class, "cvd", "checkervoxeldisc"); // [1] \\
+    MOVE(Move.class, "mv", "move", "voxelsniper.sniper.move"), // [1] \\
+    BLOCK_RESET(BlockResetBrush.class, "brb", "blockresetbrush", "voxelsniper.sniper.blockresetbrush"), // [1] \\
+    CHECKER_VOXEL_DISC(CheckerVoxelDisc.class, "cvd", "checkervoxeldisc", "voxelsniper.sniper.checkervoxeldisc"); // [1] \\
 
     private static final Map<String, SniperBrushes> BRUSHES;
 
     /**
      * @return HashMap<String, String>
      */
-    public static HashMap<String, String> getBrushAlternates() {
+    public static HashMap<String, String> getBrushAlternates(Player player) {
         final HashMap<String, String> _temp = new HashMap<String, String>();
 
         for (final SniperBrushes _vb : SniperBrushes.BRUSHES.values()) {
-            _temp.put(_vb.getLong(), _vb.getShort());
+        	if((player == null) || player.hasPermission(_vb.getPermission())) {
+        		_temp.put(_vb.getLong(), _vb.getShort());
+        	}
         }
 
         return _temp;
@@ -241,10 +243,11 @@ public enum SniperBrushes {
     /**
      * @return HashMap<String, Brush>
      */
-    public static HashMap<String, Brush> getSniperBrushes() {
+    public static HashMap<String, Brush> getSniperBrushes(Player player) {
         final HashMap<String, Brush> _temp = new HashMap<String, Brush>();
 
         for (final Entry<String, SniperBrushes> _set : SniperBrushes.BRUSHES.entrySet()) {
+        	if((player == null) || (player.hasPermission(_set.getValue().getPermission())))
             _temp.put(_set.getKey(), _set.getValue().getBrush());
         }
 
@@ -269,12 +272,11 @@ public enum SniperBrushes {
     }
 
     private Class<? extends Brush> brush;
-
     private String shortName;
-
     private String longName;
+    private String permission;
 
-    static {
+	static {
         BRUSHES = new HashMap<String, SniperBrushes>();
 
         for (final SniperBrushes _vb : SniperBrushes.values()) {
@@ -282,10 +284,11 @@ public enum SniperBrushes {
         }
     }
 
-    private SniperBrushes(final Class<? extends Brush> brush, final String shortName, final String longName) {
+    private SniperBrushes(final Class<? extends Brush> brush, final String shortName, final String longName, final String permissionNode) {
         this.brush = brush;
         this.shortName = shortName;
         this.longName = longName;
+        this.permission = permissionNode;
     }
 
     private Brush getBrush() {
@@ -318,4 +321,8 @@ public enum SniperBrushes {
     private String getShort() {
         return this.shortName;
     }
+    
+    public final String getPermission() {
+		return permission;
+	}
 }
