@@ -2,7 +2,7 @@ package com.thevoxelbox.voxelsniper;
 
 import org.bukkit.Material;
 
-import com.thevoxelbox.voxelgunsmith.MaterialData;
+import org.bukkit.material.MaterialData;
 
 /**
  * Implementation of the VoxelGunsmith MaterialData interface.
@@ -10,8 +10,12 @@ import com.thevoxelbox.voxelgunsmith.MaterialData;
  * @author MikeMatrix
  * 
  */
-public class SniperMaterialData implements MaterialData {
+public class SniperMaterialData extends org.bukkit.material.MaterialData {
 
+	
+	static {
+		System.out.println("");
+	}
     private Material material;
 
     private byte data;
@@ -21,28 +25,28 @@ public class SniperMaterialData implements MaterialData {
      * @param data
      */
     public SniperMaterialData(final Material material, final byte data) {
+    	super(material, data);
         this.material = material;
         this.data = data;
     }
 
     @Override
     public final byte getData() {
-        return this.data;
+        return super.getData();
     }
 
-    @Override
     public final Material getMaterial() {
-        return this.material;
+    	
+        return super.getItemType();
     }
 
     @Override
     public final void setData(final byte data) {
-        this.data = data;
+        super.setData(data);
     }
 
-    @Override
     public final void setMaterial(final Material material) {
-        this.material = material;
+       	this.material = material;
     }
 
 }

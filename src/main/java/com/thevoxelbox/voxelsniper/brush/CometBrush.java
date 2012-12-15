@@ -1,15 +1,16 @@
 package com.thevoxelbox.voxelsniper.brush;
 
-import net.minecraft.server.EntityFireball;
-import net.minecraft.server.EntitySmallFireball;
+import net.minecraft.src.EntityFireball;
+import net.minecraft.src.EntityLargeFireball;
+import net.minecraft.src.EntitySmallFireball;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftFireball;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.entity.CraftSmallFireball;
+import keepcalm.mods.bukkit.bukkitAPI.BukkitServer;
+import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitFireball;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitSmallFireball;
 import org.bukkit.util.Vector;
 
 import com.thevoxelbox.voxelsniper.Message;
@@ -39,17 +40,17 @@ public class CometBrush extends Brush {
 		final Vector _slope = _targetCoords.subtract(_playerLoc.toVector());
 
 		if (useBigBalls) {
-			final EntityFireball _ballEntity = new EntityFireball(((CraftWorld) v.owner().getPlayer().getWorld()).getHandle(), ((CraftPlayer) v
+			final EntityFireball _ballEntity = new EntityLargeFireball(((BukkitWorld) v.owner().getPlayer().getWorld()).getHandle(), ((BukkitPlayer) v
 					.owner().getPlayer()).getHandle(), _slope.getX(), _slope.getY(), _slope.getZ());
-			final CraftFireball _craftBall = new CraftFireball((CraftServer) v.owner().getPlayer().getServer(), _ballEntity);
+			final BukkitFireball _craftBall = new BukkitFireball((BukkitServer) v.owner().getPlayer().getServer(), _ballEntity);
 			_craftBall.setVelocity(_slope.normalize());
-			((CraftWorld) v.owner().getPlayer().getWorld()).getHandle().addEntity(_ballEntity);
+			((BukkitWorld) v.owner().getPlayer().getWorld()).getHandle().spawnEntityInWorld(_ballEntity);
 		} else {
-			final EntitySmallFireball _ballEntity = new EntitySmallFireball(((CraftWorld) v.owner().getPlayer().getWorld()).getHandle(), ((CraftPlayer) v
+			final EntitySmallFireball _ballEntity = new EntitySmallFireball(((BukkitWorld) v.owner().getPlayer().getWorld()).getHandle(), ((BukkitPlayer) v
 					.owner().getPlayer()).getHandle(), _slope.getX(), _slope.getY(), _slope.getZ());
-			final CraftSmallFireball _craftBall = new CraftSmallFireball((CraftServer) v.owner().getPlayer().getServer(), _ballEntity);
+			final BukkitSmallFireball _craftBall = new BukkitSmallFireball((BukkitServer) v.owner().getPlayer().getServer(), _ballEntity);
 			_craftBall.setVelocity(_slope.normalize());
-			((CraftWorld) v.owner().getPlayer().getWorld()).getHandle().addEntity(_ballEntity);
+			((BukkitWorld) v.owner().getPlayer().getWorld()).getHandle().spawnEntityInWorld(_ballEntity);
 		}
 	}
 	

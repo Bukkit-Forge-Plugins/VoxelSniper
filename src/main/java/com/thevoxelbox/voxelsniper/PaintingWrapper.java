@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.server.AxisAlignedBB;
-import net.minecraft.server.EntityPainting;
-import net.minecraft.server.EnumArt;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.EntityPainting;
+import net.minecraft.src.EnumArt;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;//.BukkitWorld;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 import org.bukkit.entity.Player;
 
 /**
@@ -46,7 +46,7 @@ public final class PaintingWrapper {
 
         final Location _loc = p.getTargetBlock(null, 4).getLocation();
         final Location _loc2 = p.getLocation();
-        final CraftWorld _craftWorld = (CraftWorld) p.getWorld();
+        final BukkitWorld _craftWorld = (BukkitWorld) p.getWorld();
         final double _x1 = _loc.getX() + 0.4D;
         final double _y1 = _loc.getY() + 0.4D;
         final double _z1 = _loc.getZ() + 0.4D;
@@ -54,28 +54,28 @@ public final class PaintingWrapper {
         final double _y2 = _loc.getY() + 0.6D;
         final double _z2 = _loc2.getZ();
 
-        final AxisAlignedBB _bb = AxisAlignedBB.a(Math.min(_x1, _x2), _y1, Math.min(_z1, _z2), Math.max(_x1, _x2), _y2, Math.max(_z1, _z2));
+        final AxisAlignedBB _bb = AxisAlignedBB.getBoundingBox(Math.min(_x1, _x2), _y1, Math.min(_z1, _z2), Math.max(_x1, _x2), _y2, Math.max(_z1, _z2));
 
-        final List<?> _entities = _craftWorld.getHandle().getEntities(((CraftPlayer) p).getHandle(), _bb);
+        final List<?> _entities = _craftWorld.getHandle().getEntitiesWithinAABB(((BukkitPlayer) p).getHandle().getClass(), _bb);
         if ((_entities.size() == 1) && ((_entities.get(0) instanceof EntityPainting))) {
             final EntityPainting _oldPainting = (EntityPainting) _entities.get(0);
-            final EntityPainting _newPainting = new EntityPainting(_craftWorld.getHandle(), _oldPainting.x, _oldPainting.y, _oldPainting.z,
-                    _oldPainting.direction % 4);
+            final EntityPainting _newPainting = new EntityPainting(_craftWorld.getHandle(), _oldPainting.serverPosX, _oldPainting.serverPosY, _oldPainting.serverPosZ,
+                    _oldPainting.hangingDirection % 4);
 
             _newPainting.art = _oldPainting.art;
-            _oldPainting.dead = true;
+            _oldPainting.setDead();
 
             if (_auto) {
                 final int _i = (PaintingWrapper.PAINTINGS.indexOf(_newPainting.art) + (back ? -1 : 1) + PaintingWrapper.PAINTINGS.size()) % PaintingWrapper.PAINTINGS.size();
                 _newPainting.art = (PaintingWrapper.PAINTINGS.get(_i));
-                _newPainting.setDirection(_newPainting.direction);
-                _newPainting.world.addEntity(_newPainting);
+                _newPainting.setDirection(_newPainting.hangingDirection);
+                _newPainting.worldObj.spawnEntityInWorld(_newPainting);
                 p.sendMessage(ChatColor.GREEN + "Painting set to ID: " + (_i));
             } else {
                 try {
                     _newPainting.art = (PaintingWrapper.PAINTINGS.get(choice));
-                    _newPainting.setDirection(_newPainting.direction);
-                    _newPainting.world.addEntity(_newPainting);
+                    _newPainting.setDirection(_newPainting.hangingDirection);
+                    _newPainting.worldObj.spawnEntityInWorld(_newPainting);
                     p.sendMessage(ChatColor.GREEN + "Painting set to ID: " + choice);
                 } catch (final Exception _e) {
                     p.sendMessage(ChatColor.RED + "Your input was invalid somewhere.");

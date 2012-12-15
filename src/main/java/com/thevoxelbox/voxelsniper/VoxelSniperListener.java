@@ -2,14 +2,14 @@ package com.thevoxelbox.voxelsniper;
 
 import java.util.logging.Level;
 
-import net.minecraft.server.Packet39AttachEntity;
+import net.minecraft.src.Packet39AttachEntity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -618,12 +618,12 @@ public class VoxelSniperListener implements Listener {
 
     private static void sitAll() {
         for (final Player _player : Bukkit.getServer().getOnlinePlayers()) {
-            ((CraftPlayer) _player).getHandle().netServerHandler.sendPacket(new Packet39AttachEntity(((CraftPlayer) _player).getHandle(),
-                    ((CraftPlayer) _player).getHandle()));
+            ((BukkitPlayer) _player).getHandle().playerNetServerHandler.sendPacketToPlayer(new Packet39AttachEntity(((BukkitPlayer) _player).getHandle(),
+                    ((BukkitPlayer) _player).getHandle()));
             for (final Player _p : _player.getServer().getOnlinePlayers()) {
                 if (!_p.getName().equals(_player.getName())) {
-                    ((CraftPlayer) _p).getHandle().netServerHandler.sendPacket(new Packet39AttachEntity(((CraftPlayer) _player).getHandle(),
-                            ((CraftPlayer) _player).getHandle()));
+                    ((BukkitPlayer) _p).getHandle().playerNetServerHandler.sendPacketToPlayer(new Packet39AttachEntity(((BukkitPlayer) _player).getHandle(),
+                            ((BukkitPlayer) _player).getHandle()));
                 }
             }
         }

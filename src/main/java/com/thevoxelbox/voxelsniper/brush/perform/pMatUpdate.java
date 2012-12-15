@@ -6,11 +6,11 @@ package com.thevoxelbox.voxelsniper.brush.perform;
 
 import com.thevoxelbox.voxelsniper.Message;
 import com.thevoxelbox.voxelsniper.Sniper;
-import net.minecraft.server.Packet53BlockChange;
+import net.minecraft.src.Packet53BlockChange;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 
 /**
  *
@@ -43,6 +43,6 @@ public class pMatUpdate extends vPerformer {
     public void perform(Block b) {
         h.put(b);
         b.setTypeId(i);
-        ((CraftPlayer) s.getPlayer()).getHandle().netServerHandler.sendPacket(new Packet53BlockChange(b.getX(), b.getY(), b.getZ(), ((CraftWorld) s.getPlayer().getWorld()).getHandle()));
+        ((BukkitPlayer) s.getPlayer()).getHandle().playerNetServerHandler.sendPacketToPlayer(new Packet53BlockChange(b.getX(), b.getY(), b.getZ(), ((BukkitWorld) s.getPlayer().getWorld()).getHandle()));
     }
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.entity.Player;
+import org.bukkit.material.MaterialData;
 
 import com.thevoxelbox.voxelgunsmith.Brush;
-import com.thevoxelbox.voxelgunsmith.MaterialData;
 import com.thevoxelbox.voxelgunsmith.ToolConfiguration;
 import com.thevoxelbox.voxelgunsmith.User;
 
@@ -17,8 +17,8 @@ import com.thevoxelbox.voxelgunsmith.User;
  * @author MikeMatrix
  * 
  */
-public class SniperUser implements User {
-
+public class SniperUser implements User  {
+	
     private final Player player;
     private final Map<String, ToolConfiguration> toolConfigurations = new HashMap<String, ToolConfiguration>();
     private final Map<String, List<Brush>> toolBrushInstances = new HashMap<String, List<Brush>>();

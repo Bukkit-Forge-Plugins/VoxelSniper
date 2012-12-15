@@ -1,11 +1,11 @@
 package com.thevoxelbox.voxelsniper.brush;
 
-import net.minecraft.server.EntityCreature;
-import net.minecraft.server.NPC;
+import net.minecraft.src.EntityCreature;
+import net.minecraft.src.INpc;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
@@ -51,8 +51,8 @@ public class EntityRemovalBrush extends Brush {
             if ((_e instanceof Player) || (_e instanceof Painting)) {
                 continue;
             } else {
-                if (((CraftEntity) _e).getHandle() instanceof NPC) {
-                    if (!(((CraftEntity) _e).getHandle() instanceof EntityCreature)) {
+                if (((BukkitEntity) _e).getHandle() instanceof INpc) {
+                    if (!(((BukkitEntity) _e).getHandle() instanceof EntityCreature)) {
                         continue;
                     }
                 }
