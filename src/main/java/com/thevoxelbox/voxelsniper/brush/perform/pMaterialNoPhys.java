@@ -4,8 +4,9 @@
  */
 package com.thevoxelbox.voxelsniper.brush.perform;
 
-import com.thevoxelbox.voxelsniper.Message;
 import org.bukkit.block.Block;
+
+import com.thevoxelbox.voxelsniper.Message;
 
 /**
  *

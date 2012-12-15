@@ -2,14 +2,14 @@ package com.thevoxelbox.voxelsniper;
 
 import java.util.logging.Level;
 
-import net.minecraft.src.Packet39AttachEntity;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
+import net.minecraft.network.packet.Packet39AttachEntity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -4,14 +4,15 @@
  */
 package com.thevoxelbox.voxelsniper.brush.tool;
 
-import com.thevoxelbox.voxelsniper.brush.IBrush;
-import com.thevoxelbox.voxelsniper.brush.Sneak;
-import com.thevoxelbox.voxelsniper.Sniper;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
+
+import com.thevoxelbox.voxelsniper.Sniper;
+import com.thevoxelbox.voxelsniper.brush.IBrush;
+import com.thevoxelbox.voxelsniper.brush.Sneak;
 
 /**
  *

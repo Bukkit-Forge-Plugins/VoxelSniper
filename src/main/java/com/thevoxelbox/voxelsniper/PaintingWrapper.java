@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.EntityPainting;
-import net.minecraft.src.EnumArt;
+import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;
+import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
+import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumArt;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;//.BukkitWorld;
-import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 import org.bukkit.entity.Player;
+//.BukkitWorld;
 
 /**
  * Painting state change handler.

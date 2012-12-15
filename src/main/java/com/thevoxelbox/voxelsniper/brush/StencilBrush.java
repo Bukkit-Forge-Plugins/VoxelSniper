@@ -10,8 +10,8 @@ import java.io.FileOutputStream;
 
 import org.bukkit.ChatColor;
 
-import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.Undo;
 
 /**

@@ -4,8 +4,8 @@
  */
 package com.thevoxelbox.voxelsniper.brush.perform;
 
-import com.thevoxelbox.voxelsniper.brush.Brush;
 import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.brush.Brush;
 
 /**
  *

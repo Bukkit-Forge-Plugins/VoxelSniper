@@ -4,11 +4,11 @@
  */
 package com.thevoxelbox.voxelsniper.brush.perform;
 
-import com.thevoxelbox.voxelsniper.Message;
-import com.thevoxelbox.voxelsniper.Undo;
-
 import org.bukkit.World;
 import org.bukkit.block.Block;
+
+import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.Undo;
 
 /**
  *

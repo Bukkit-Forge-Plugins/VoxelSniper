@@ -2,8 +2,6 @@ package com.thevoxelbox.voxelsniper;
 
 import org.bukkit.Material;
 
-import org.bukkit.material.MaterialData;
-
 /**
  * Implementation of the VoxelGunsmith MaterialData interface.
  * 

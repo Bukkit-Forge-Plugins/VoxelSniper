@@ -4,13 +4,15 @@
  */
 package com.thevoxelbox.voxelsniper.brush.perform;
 
-import com.thevoxelbox.voxelsniper.Message;
-import com.thevoxelbox.voxelsniper.Sniper;
-import net.minecraft.src.Packet53BlockChange;
-import org.bukkit.ChatColor;
-import org.bukkit.block.Block;
 import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;
 import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
+import net.minecraft.network.packet.Packet53BlockChange;
+
+import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
+
+import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.Sniper;
 
 /**
  *

@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.util.Vector;
 
-import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.brush.perform.PerformBrush;
 
 /**

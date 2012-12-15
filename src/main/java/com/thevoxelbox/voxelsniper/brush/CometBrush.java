@@ -1,16 +1,16 @@
 package com.thevoxelbox.voxelsniper.brush;
 
-import net.minecraft.src.EntityFireball;
-import net.minecraft.src.EntityLargeFireball;
-import net.minecraft.src.EntitySmallFireball;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import keepcalm.mods.bukkit.bukkitAPI.BukkitServer;
 import keepcalm.mods.bukkit.bukkitAPI.BukkitWorld;
 import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitFireball;
 import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitPlayer;
 import keepcalm.mods.bukkit.bukkitAPI.entity.BukkitSmallFireball;
+import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 import com.thevoxelbox.voxelsniper.Message;

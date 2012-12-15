@@ -2,8 +2,8 @@ package com.thevoxelbox.voxelsniper.brush;
 
 import org.bukkit.ChatColor;
 
-import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.Message;
+import com.thevoxelbox.voxelsniper.SnipeData;
 
 /**
  * The CloneStamp class is used to create a collection of blocks in a cylinder shape according to the selection the player has set.

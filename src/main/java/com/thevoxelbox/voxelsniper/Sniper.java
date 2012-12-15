@@ -2,7 +2,6 @@ package com.thevoxelbox.voxelsniper;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
